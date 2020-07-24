@@ -15,7 +15,7 @@
             var settings = File.ReadAllText("settings.json");
             var facebookSettings = JsonConvert.DeserializeObject<FacebookSettings>(settings);
 
-            var postOnWallTask = facebookService.PostOnWallAsync(facebookSettings.FacebookAccess.AccessToken, $"Test");
+            var postOnWallTask = facebookService.PostOnWallAsync(facebookSettings.FacebookAccess.AccessToken, "Test");
 
             Task.WaitAll(postOnWallTask);
         }
