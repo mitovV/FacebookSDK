@@ -8,11 +8,10 @@
     public class Upload
     {
         private readonly FacebookClient facebookClient;
-        private readonly string accessToken;
+
         public Upload(string accessToken)
         {
             this.facebookClient = new FacebookClient(accessToken);
-            this.accessToken = accessToken;
         }
 
         public void UploadPictureToWall(string id, string pictureUrl, string message)
