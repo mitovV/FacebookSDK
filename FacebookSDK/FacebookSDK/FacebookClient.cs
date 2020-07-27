@@ -18,7 +18,7 @@ namespace FacebookSDK
         {
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("https://graph.facebook.com")
+                BaseAddress = new Uri("https://graph.facebook.com/v7.0")
             };
             _httpClient.DefaultRequestHeaders
                 .Accept
