@@ -1,12 +1,12 @@
 ﻿namespace FacebookSDK
 {
     using System.IO;
-    using System.Threading.Tasks;
+    using System.Threading;
 
+    using DataParser;
     using UploadPictureProject;
 
     using Newtonsoft.Json;
-    using DataParser;
 
     public class Startup
     {
@@ -21,15 +21,21 @@
             var accessToken = facebookSettings.FacebookAccess.AccessToken;
 
             var parser = new Parser();
-            var post = parser.GetData(baseUrl);
 
-            if (post != null)
+            while (true)
             {
-                var message = $"{post.Title}\nЦена: {post.Price}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
+                var post = parser.GetData(baseUrl);
 
-                var upload = new Upload(accessToken);
+                if (post != null)
+                {
+                    var message = $"{post.Title}\nЦена: {post.Price}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
 
-                upload.UploadPictureToWall(id, post.PictureUrl, message);
+                    var upload = new Upload(accessToken);
+
+                    upload.UploadPictureToWall(id, post.PictureUrl, message);
+                }
+
+                Thread.Sleep(5000);
             }
         }
     }
