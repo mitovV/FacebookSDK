@@ -6,21 +6,31 @@
     using UploadPictureProject;
 
     using Newtonsoft.Json;
+    using DataParser;
 
     public class Startup
     {
         public static void Main()
         {
+            var baseUrl = "http://vtora-upotreba.org/";
+
             var settings = File.ReadAllText("settings.json");
             var facebookSettings = JsonConvert.DeserializeObject<FacebookSettings>(settings);
 
             var id = facebookSettings.FacebookAccess.Id;
             var accessToken = facebookSettings.FacebookAccess.AccessToken;
-            var pictureUrl = @"http://vtora-upotreba.org/images/stories/virtuemart/product/501177_1014487_1.jpg";
 
-            var upload = new Upload(accessToken);
+            var parser = new Parser();
+            var post = parser.GetData(baseUrl);
 
-            upload.UploadPictureToWall(id, pictureUrl, "Test \n new row");
+            if (post != null)
+            {
+                var message = $"{post.Title}\nЦена: {post.Price}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
+
+                var upload = new Upload(accessToken);
+
+                upload.UploadPictureToWall(id, post.PictureUrl, message);
+            }
         }
     }
 }

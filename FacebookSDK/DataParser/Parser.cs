@@ -6,6 +6,8 @@
 
     public class Parser
     {
+        private string lastPostLink;
+
         public PostDTO GetData(string baseUrl)
         {
             var parser = new HtmlParser();
@@ -31,6 +33,11 @@
                 .Value
                 .Trim();
 
+            if (lastPostLink == productDetailsLink)
+            {
+                return null;
+            }
+
             var pictureUrl = baseUrl + element
                 .FirstElementChild
                 .QuerySelector("img")
@@ -45,6 +52,8 @@
             var price = document
                 .QuerySelector("div[class='moduletable'] div[class='vmgroup'] div[class='product-price'] div [class='PricesalesPrice']")
                 .InnerHtml;
+
+            lastPostLink = productDetailsLink;
 
             return new PostDTO
             {
