@@ -1,2 +1,2 @@
 # FacebookSDK
-For simple post on pages
+Takes data from online shop and makes posts on facebook page
