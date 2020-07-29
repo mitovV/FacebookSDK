@@ -28,7 +28,7 @@
 
                 if (post != null)
                 {
-                    var message = $"{post.Title}\nЦена: {post.Price}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
+                    var message = $"{post.Title}\nЦена: {post.Price}\n{post.Office}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
 
                     var upload = new Upload(accessToken);
 

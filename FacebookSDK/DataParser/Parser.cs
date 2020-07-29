@@ -38,6 +38,19 @@
                 return null;
             }
 
+            var productPage = httpClient
+                .GetStringAsync(productDetailsLink)
+                .GetAwaiter()
+                .GetResult();
+
+            var productPageDocument = parser
+                .ParseDocument(productPage);
+
+            var office = productPageDocument
+                .QuerySelector("div[class='productdetails-view productdetails'] div[class='manufacturer']")
+                .TextContent
+                .Trim();
+
             var pictureUrl = baseUrl + element
                 .FirstElementChild
                 .QuerySelector("img")
@@ -60,7 +73,8 @@
                 ProductDetailsLink = productDetailsLink,
                 PictureUrl = pictureUrl,
                 Title = title,
-                Price = price
+                Price = price,
+                Office = office
             };
         }
     }
