@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon>purepng.com-sdk-iconsymbolsiconsapple-iosiosios-8-iconsios-8-721522596112yxdto.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
