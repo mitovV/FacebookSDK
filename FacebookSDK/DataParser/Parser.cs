@@ -1,13 +1,12 @@
 ﻿namespace DataParser
 {
+    using System.IO;
     using System.Net.Http;
 
     using AngleSharp.Html.Parser;
 
     public class Parser
     {
-        private string lastPostLink;
-
         public PostDTO GetData(string baseUrl)
         {
             var parser = new HtmlParser();
@@ -32,6 +31,8 @@
                 .Attributes["href"]
                 .Value
                 .Trim();
+
+            var lastPostLink = File.ReadAllText("../../../lastPostLink.txt");
 
             if (lastPostLink == productDetailsLink)
             {
@@ -66,7 +67,7 @@
                 .QuerySelector("div[class='moduletable'] div[class='vmgroup'] div[class='product-price'] div [class='PricesalesPrice']")
                 .InnerHtml;
 
-            lastPostLink = productDetailsLink;
+            File.WriteAllText("../../../lastPostLink.txt", productDetailsLink);
 
             return new PostDTO
             {
