@@ -26,9 +26,10 @@
 
                 var postId = (string)result["id"];
 
-                Console.WriteLine("Post Id: {0}", postId);
+                Console.WriteLine($"Post Id: {postId}");
 
-                Console.WriteLine("Json: {0}", result.ToString());
+                Console.WriteLine($"Json: {result}");
+                Console.WriteLine($"Time: {DateTime.Now}");
 
             }
             catch (FacebookApiException ex)

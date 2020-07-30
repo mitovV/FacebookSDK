@@ -7,11 +7,15 @@
     using UploadPictureProject;
 
     using Newtonsoft.Json;
+    using System;
+    using System.Text;
 
     public class Startup
     {
         public static void Main()
         {
+            Console.OutputEncoding = Encoding.UTF8;
+
             var baseUrl = "http://vtora-upotreba.org/";
 
             var settings = File.ReadAllText("settings.json");
