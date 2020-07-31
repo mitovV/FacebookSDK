@@ -35,7 +35,6 @@
             catch (FacebookApiException ex)
             {
                 Console.WriteLine(ex.Message);
-                Console.ReadKey();
                 throw ex;
             }
         }
@@ -59,7 +58,6 @@
             catch (FacebookApiException ex)
             {
                 Console.WriteLine(ex.Message);
-                Console.ReadKey();
                 throw ex;
             }
         }
