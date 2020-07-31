@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <ApplicationIcon>FacebookSDK.ico</ApplicationIcon>
+   
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <None Update="lastPostLink.txt">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -32,7 +32,7 @@
                 .Value
                 .Trim();
 
-            var lastPostLink = File.ReadAllText("../../../lastPostLink.txt");
+            var lastPostLink = File.ReadAllText("lastPostLink.txt");
 
             if (lastPostLink == productDetailsLink)
             {
@@ -67,7 +67,7 @@
                 .QuerySelector("div[class='moduletable'] div[class='vmgroup'] div[class='product-price'] div [class='PricesalesPrice']")
                 .InnerHtml;
 
-            File.WriteAllText("../../../lastPostLink.txt", productDetailsLink);
+            File.WriteAllText("lastPostLink.txt", productDetailsLink);
 
             return new PostDTO
             {
