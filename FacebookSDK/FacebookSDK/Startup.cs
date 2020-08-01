@@ -1,13 +1,13 @@
 ﻿namespace FacebookSDK
 {
     using System.IO;
+    using System.Net.Http;
 
     using DataParser;
     using UploadPictureProject;
 
-    using Newtonsoft.Json;
     using AngleSharp.Html.Parser;
-    using System.Net.Http;
+    using Newtonsoft.Json;
 
     public class Startup
     {
