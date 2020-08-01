@@ -19,8 +19,8 @@
             var html = await httpClient
                 .GetStringAsync(baseUrl);
 
-            var document = parser
-                .ParseDocument(html);
+            var document = await parser
+                .ParseDocumentAsync(html);
 
             var element = document
                 .QuerySelector("div[class='moduletable'] div[class='vmgroup'] ul li");
@@ -41,8 +41,8 @@
             var productPage = await httpClient
                 .GetStringAsync(productDetailsLink);
 
-            var productPageDocument = parser
-                .ParseDocument(productPage);
+            var productPageDocument = await parser
+                .ParseDocumentAsync(productPage);
 
             var office = productPageDocument
                 .QuerySelector("div[class='productdetails-view productdetails'] div[class='manufacturer']")

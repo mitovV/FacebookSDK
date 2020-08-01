@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using DataParser;
+
     using UploadPictureProject;
 
     public class Engine
@@ -35,7 +36,14 @@
                     {
                         var message = $"{post.Title}\nЦена: {post.Price}\n{post.Office}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
 
-                        await upload.UploadPictureToWall(id, post.PictureUrl, message);
+                        var result = await upload.UploadPictureToWallAsync(id, post.PictureUrl, message);
+
+                        var postId = (string)result["id"];
+
+                        Console.WriteLine($"Post Id: {postId}");
+
+                        Console.WriteLine($"Json: {result}");
+                        Console.WriteLine($"Time: {DateTime.Now}");
                     }
 
                     Thread.Sleep(5000);
