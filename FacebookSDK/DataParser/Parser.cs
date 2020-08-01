@@ -8,10 +8,17 @@
 
     public class Parser
     {
+        private readonly IHtmlParser htmlParser;
+        private readonly HttpClient httpClient;
+
+        public Parser(IHtmlParser parser, HttpClient httpClient)
+        {
+            this.htmlParser = parser;
+            this.httpClient = httpClient;
+        }
+
         public async Task<PostDTO> GetDataAsync(string baseUrl)
         {
-            var parser = new HtmlParser();
-            var httpClient = new HttpClient();
 
             httpClient.DefaultRequestHeaders
                 .Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0");
@@ -19,7 +26,7 @@
             var html = await httpClient
                 .GetStringAsync(baseUrl);
 
-            var document = await parser
+            var document = await htmlParser
                 .ParseDocumentAsync(html);
 
             var element = document
@@ -41,7 +48,7 @@
             var productPage = await httpClient
                 .GetStringAsync(productDetailsLink);
 
-            var productPageDocument = await parser
+            var productPageDocument = await htmlParser
                 .ParseDocumentAsync(productPage);
 
             var office = productPageDocument
