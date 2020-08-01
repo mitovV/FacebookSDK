@@ -2,12 +2,13 @@
 {
     using System.IO;
     using System.Net.Http;
+    using System.Threading.Tasks;
 
     using AngleSharp.Html.Parser;
 
     public class Parser
     {
-        public PostDTO GetData(string baseUrl)
+        public async Task<PostDTO> GetDataAsync(string baseUrl)
         {
             var parser = new HtmlParser();
             var httpClient = new HttpClient();
@@ -15,10 +16,8 @@
             httpClient.DefaultRequestHeaders
                 .Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0");
 
-            var html = httpClient
-                .GetStringAsync(baseUrl)
-                .GetAwaiter()
-                .GetResult();
+            var html = await httpClient
+                .GetStringAsync(baseUrl);
 
             var document = parser
                 .ParseDocument(html);
@@ -39,10 +38,8 @@
                 return null;
             }
 
-            var productPage = httpClient
-                .GetStringAsync(productDetailsLink)
-                .GetAwaiter()
-                .GetResult();
+            var productPage = await httpClient
+                .GetStringAsync(productDetailsLink);
 
             var productPageDocument = parser
                 .ParseDocument(productPage);

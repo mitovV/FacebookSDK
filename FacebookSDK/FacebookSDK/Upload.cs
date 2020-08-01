@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using Facebook;
 
@@ -14,52 +15,35 @@
             this.facebookClient = new FacebookClient(accessToken);
         }
 
-        public void UploadPictureToWall(string id, string pictureUrl, string message)
+        public async Task UploadPictureToWall(string id, string pictureUrl, string message)
         {
-            try
-            {
-                var result = (IDictionary<string, object>)facebookClient.Post(id + "/photos", new Dictionary<string, object>
+            var result = (IDictionary<string, object>)await facebookClient.PostTaskAsync(id + "/photos", new Dictionary<string, object>
                                    {
                                        { "url", pictureUrl },
                                        { "message",$"{message}" }
                                    });
 
-                var postId = (string)result["id"];
+            var postId = (string)result["id"];
 
-                Console.WriteLine($"Post Id: {postId}");
+            Console.WriteLine($"Post Id: {postId}");
 
-                Console.WriteLine($"Json: {result}");
-                Console.WriteLine($"Time: {DateTime.Now}");
-
-            }
-            catch (FacebookApiException ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw ex;
-            }
+            Console.WriteLine($"Json: {result}");
+            Console.WriteLine($"Time: {DateTime.Now}");
         }
 
-        public void UploadPostToWall(string id, string text)
+        public async Task UploadPostToWall(string id, string text)
         {
-            try
-            {
-                var result = (IDictionary<string, object>)facebookClient.Post(id + "/feed", new Dictionary<string, object>
+            var result = (IDictionary<string, object>)await facebookClient.PostTaskAsync(id + "/feed", new Dictionary<string, object>
                                    {
                                        { "message",$"{text}" }
                                    });
 
-                var postId = (string)result["id"];
+            var postId = (string)result["id"];
 
-                Console.WriteLine("Post Id: {0}", postId);
+            Console.WriteLine($"Post Id: {postId}");
 
-                Console.WriteLine("Json: {0}", result.ToString());
-
-            }
-            catch (FacebookApiException ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw ex;
-            }
+            Console.WriteLine($"Json: {result}");
+            Console.WriteLine($"Time: {DateTime.Now}");
         }
     }
 }

@@ -3,10 +3,9 @@
     using System.IO;
 
     using DataParser;
+    using UploadPictureProject;
 
     using Newtonsoft.Json;
-
-    using UploadPictureProject;
 
     public class Startup
     {
@@ -25,7 +24,10 @@
 
             var engine = new Engine(baseUrl, parser, upload, id);
 
-            engine.Run();
+            engine
+                .RunAsync()
+                .GetAwaiter()
+                .GetResult();
         }
     }
 }

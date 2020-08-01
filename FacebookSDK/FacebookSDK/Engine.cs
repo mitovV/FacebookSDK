@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
 
     using DataParser;
-
     using UploadPictureProject;
 
     public class Engine
@@ -24,31 +23,28 @@
             this.id = id;
         }
 
-        public void Run()
+        public async Task RunAsync()
         {
             try
             {
-                Task.Run(() =>
+                while (true)
                 {
-                    while (true)
+                    var post = await parser.GetDataAsync(baseUrl);
+
+                    if (post != null)
                     {
-                        var post = parser.GetData(baseUrl);
+                        var message = $"{post.Title}\nЦена: {post.Price}\n{post.Office}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
 
-                        if (post != null)
-                        {
-                            var message = $"{post.Title}\nЦена: {post.Price}\n{post.Office}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
-
-
-                            upload.UploadPictureToWall(id, post.PictureUrl, message);
-                        }
-
-                        Thread.Sleep(5000);
+                        await upload.UploadPictureToWall(id, post.PictureUrl, message);
                     }
-                }).GetAwaiter().GetResult();
+
+                    Thread.Sleep(5000);
+                }
             }
             catch (Exception ex)
             {
                 File.WriteAllText("exception.txt", ex.Message);
+                Console.WriteLine(ex.Message);
                 Startup.Main();
             }
         }
