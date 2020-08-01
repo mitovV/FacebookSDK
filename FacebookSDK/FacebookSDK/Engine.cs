@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using DataParser;
+
     using UploadPictureProject;
 
     public class Engine
@@ -52,6 +53,12 @@
             {
                 File.WriteAllText("exception.txt", ex.Message);
                 Console.WriteLine(ex.Message);
+
+                if (ex.Message.Contains("Invalid parameter"))
+                {
+                    await File.WriteAllTextAsync("lastPostLink.txt", "");
+                }
+
                 Startup.Main();
             }
         }
