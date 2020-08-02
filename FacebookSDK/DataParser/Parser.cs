@@ -19,8 +19,8 @@
 
         public async Task<PostDTO> GetDataAsync(string baseUrl)
         {
-
-            httpClient.DefaultRequestHeaders
+            httpClient
+                .DefaultRequestHeaders
                 .Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0");
 
             var html = await httpClient
@@ -70,8 +70,6 @@
             var price = document
                 .QuerySelector("div[class='moduletable'] div[class='vmgroup'] div[class='product-price'] div [class='PricesalesPrice']")
                 .InnerHtml;
-
-            File.WriteAllText("lastPostLink.txt", productDetailsLink);
 
             return new PostDTO
             {

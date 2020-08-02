@@ -44,6 +44,8 @@
 
                         Console.WriteLine($"Json: {result}");
                         Console.WriteLine($"Time: {DateTime.Now}");
+
+                        File.WriteAllText("lastPostLink.txt", post.ProductDetailsLink);
                     }
 
                     Thread.Sleep(5000);
@@ -53,11 +55,6 @@
             {
                 File.WriteAllText("exception.txt", ex.Message);
                 Console.WriteLine(ex.Message);
-
-                if (ex.Message.Contains("Invalid parameter"))
-                {
-                    await File.WriteAllTextAsync("lastPostLink.txt", "");
-                }
 
                 Startup.Main();
             }
