@@ -1,4 +1,4 @@
-﻿namespace DataParser
+﻿namespace Models
 {
     public class PostDTO
     {

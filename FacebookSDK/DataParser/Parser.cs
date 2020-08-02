@@ -4,6 +4,8 @@
     using System.Net.Http;
     using System.Threading.Tasks;
 
+    using Models;
+
     using AngleSharp.Html.Parser;
 
     public class Parser
