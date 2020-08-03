@@ -29,9 +29,14 @@
                 while (true)
                 {
                     var post = await parser.GetDataAsync(baseUrl);
-
+                    
                     if (post != null)
                     {
+                        if (post.PictureUrl is null || post.ProductDetailsLink is null)
+                        {
+                            post = await parser.GetDataAsync(baseUrl);
+                        }
+
                         var message = $"{post.Title}\nЦена: {post.Price}\n{post.Office}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
 
                         var result = await upload.UploadPictureToWallAsync(id, post.PictureUrl, message);
