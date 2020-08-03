@@ -51,7 +51,7 @@
             }
             catch (Exception ex)
             {
-                File.WriteAllText("exception.txt", ex.Message);
+                File.WriteAllText("exception.txt", $"{ex.Message}\n{ex.StackTrace}\n{DateTime.Now}");
                 Console.WriteLine(ex.Message);
 
                 Startup.Main();
