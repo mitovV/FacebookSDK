@@ -40,7 +40,8 @@
                 .Value
                 .Trim();
 
-            var lastPostLink = File.ReadAllText("lastPostLink.txt");
+            var lastPostLink = File
+                .ReadAllText("lastPostLink.txt");
 
             if (lastPostLink == productDetailsLink)
             {

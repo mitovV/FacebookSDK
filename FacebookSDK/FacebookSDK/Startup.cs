@@ -14,11 +14,19 @@
         {
             var baseUrl = "http://vtora-upotreba.org/";
 
-            var settings = File.ReadAllText("settings.json");
-            var facebookSettings = JsonConvert.DeserializeObject<FacebookSettings>(settings);
+            var settings = File
+                .ReadAllText("settings.json");
 
-            var id = facebookSettings.FacebookAccess.Id;
-            var accessToken = facebookSettings.FacebookAccess.AccessToken;
+            var facebookSettings = JsonConvert
+                .DeserializeObject<FacebookSettings>(settings);
+
+            var id = facebookSettings
+                .FacebookAccess
+                .Id;
+
+            var accessToken = facebookSettings
+                .FacebookAccess
+                .AccessToken;
 
             var htmlParser = new HtmlParser();
             var httpClient = new HttpClient();

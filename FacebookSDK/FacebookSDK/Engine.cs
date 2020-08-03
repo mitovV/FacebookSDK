@@ -28,18 +28,21 @@
             {
                 while (true)
                 {
-                    var post = await parser.GetDataAsync(baseUrl);
+                    var post = await parser
+                        .GetDataAsync(baseUrl);
 
                     if (post != null)
                     {
                         if (post.PictureUrl is null || post.ProductDetailsLink is null)
                         {
-                            post = await parser.GetDataAsync(baseUrl);
+                            post = await parser
+                                .GetDataAsync(baseUrl);
                         }
 
                         var message = $"{post.Title}\nЦена: {post.Price}\n{post.Office}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
 
-                        var result = await upload.UploadPictureToWallAsync(id, post.PictureUrl, message);
+                        var result = await upload
+                            .UploadPictureToWallAsync(id, post.PictureUrl, message);
 
                         var postId = (string)result["id"];
 
@@ -48,18 +51,23 @@
                         Console.WriteLine($"Json: {result}");
                         Console.WriteLine($"Time: {DateTime.Now}");
 
-                        File.WriteAllText("lastPostLink.txt", post.ProductDetailsLink);
+                        File
+                            .WriteAllText("lastPostLink.txt", post.ProductDetailsLink);
                     }
 
-                    Thread.Sleep(5000);
+                    Thread
+                        .Sleep(5000);
                 }
             }
             catch (Exception ex)
             {
-                await File.WriteAllTextAsync("exception.txt", $"{ex.Message}\n{ex.StackTrace}\n{DateTime.Now}");
+                await File
+                    .WriteAllTextAsync("exception.txt", $"{ex.Message}\n{ex.StackTrace}\n{DateTime.Now}");
+
                 Console.WriteLine(ex.Message);
 
-                Startup.Main();
+                Startup
+                    .Main();
             }
         }
     }
