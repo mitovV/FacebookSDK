@@ -29,7 +29,7 @@
                 while (true)
                 {
                     var post = await parser.GetDataAsync(baseUrl);
-                    
+
                     if (post != null)
                     {
                         if (post.PictureUrl is null || post.ProductDetailsLink is null)
@@ -56,7 +56,7 @@
             }
             catch (Exception ex)
             {
-                File.WriteAllText("exception.txt", $"{ex.Message}\n{ex.StackTrace}\n{DateTime.Now}");
+                await File.WriteAllTextAsync("exception.txt", $"{ex.Message}\n{ex.StackTrace}\n{DateTime.Now}");
                 Console.WriteLine(ex.Message);
 
                 Startup.Main();
