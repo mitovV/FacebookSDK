@@ -4,7 +4,6 @@
     using System.Net.Http;
 
     using DataParser;
-    using UploadPictureProject;
 
     using AngleSharp.Html.Parser;
     using Newtonsoft.Json;

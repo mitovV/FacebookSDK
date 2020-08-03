@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
 
     using DataParser;
-    using UploadPictureProject;
 
     public class Engine
     {

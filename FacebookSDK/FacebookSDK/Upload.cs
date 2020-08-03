@@ -1,4 +1,4 @@
-﻿namespace UploadPictureProject
+﻿namespace FacebookSDK
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
