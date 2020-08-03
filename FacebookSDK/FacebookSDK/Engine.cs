@@ -7,6 +7,8 @@
 
     using DataParser;
 
+    using Models;
+
     public class Engine
     {
         private readonly string baseUrl;
@@ -35,8 +37,7 @@
                     {
                         if (post.PictureUrl is null || post.ProductDetailsLink is null)
                         {
-                            post = await parser
-                                .GetDataAsync(baseUrl);
+                            continue;
                         }
 
                         var message = $"{post.Title}\nЦена: {post.Price}\n{post.Office}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
