@@ -24,7 +24,6 @@
 
         public async Task RunAsync()
         {
-
             while (true)
             {
                 Thread
@@ -54,8 +53,8 @@
                         Console.WriteLine($"Json: {result}");
                         Console.WriteLine($"Time: {DateTime.Now}");
 
-                        File
-                            .WriteAllText("lastPostLink.txt", post.ProductDetailsLink);
+                       await File
+                            .WriteAllTextAsync("lastPostLink.txt", post.ProductDetailsLink);
                     }
                 }
                 catch (Exception ex)
