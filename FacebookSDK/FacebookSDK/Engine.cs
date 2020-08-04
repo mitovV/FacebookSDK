@@ -7,8 +7,6 @@
 
     using DataParser;
 
-    using Models;
-
     public class Engine
     {
         private readonly string baseUrl;
@@ -26,9 +24,10 @@
 
         public async Task RunAsync()
         {
-            try
+
+            while (true)
             {
-                while (true)
+                try
                 {
                     var post = await parser
                         .GetDataAsync(baseUrl);
@@ -59,16 +58,15 @@
                     Thread
                         .Sleep(5000);
                 }
-            }
-            catch (Exception ex)
-            {
-                await File
-                    .WriteAllTextAsync("exception.txt", $"{ex.Message}\n{ex.StackTrace}\n{DateTime.Now}");
+                catch (Exception ex)
+                {
+                    await File
+                        .WriteAllTextAsync("exception.txt", $"{ex.Message}\n{ex.StackTrace}\n{DateTime.Now}");
 
-                Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.Message);
 
-                Startup
-                    .Main();
+                    continue;
+                }
             }
         }
     }
