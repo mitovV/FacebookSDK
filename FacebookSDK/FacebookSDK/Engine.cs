@@ -27,6 +27,9 @@
 
             while (true)
             {
+                Thread
+                        .Sleep(5000);
+
                 try
                 {
                     var post = await parser
@@ -54,9 +57,6 @@
                         File
                             .WriteAllText("lastPostLink.txt", post.ProductDetailsLink);
                     }
-
-                    Thread
-                        .Sleep(5000);
                 }
                 catch (Exception ex)
                 {
