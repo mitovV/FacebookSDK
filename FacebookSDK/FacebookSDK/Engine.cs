@@ -41,7 +41,7 @@
                             continue;
                         }
 
-                        var message = $"{post.Title}\nЦена: {post.Price}\n{post.Office}\nДетайли: ⬇⬇⬇⬇⬇⬇\n{post.ProductDetailsLink}";
+                        var message = $"🛒 {post.Title}\n💴 Цена: {post.Price}\n🌎 {post.Office}\n‼ Детайли: ⬇⬇⬇⬇\n✅ {post.ProductDetailsLink}";
 
                         var result = await upload
                             .UploadPictureToWallAsync(id, post.PictureUrl, message);
