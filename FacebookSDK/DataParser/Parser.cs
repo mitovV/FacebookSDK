@@ -4,7 +4,7 @@
     using System.Net.Http;
     using System.Threading.Tasks;
 
-    using Models;
+    using FacebookSDK.Models;
 
     using AngleSharp.Html.Parser;
 

@@ -1,21 +1,25 @@
 ﻿namespace FacebookSDK
 {
+    using System;
     using System.IO;
     using System.Net.Http;
+    using System.Text;
 
     using DataParser;
 
     using AngleSharp.Html.Parser;
     using Newtonsoft.Json;
 
+    using static Common.GlobalConstants.Startup;
+
     public class Startup
     {
         public static void Main()
         {
-            var baseUrl = "http://vtora-upotreba.org/";
+            Console.OutputEncoding = Encoding.UTF8;
 
             var settings = File
-                .ReadAllText("settings.json");
+                .ReadAllText(FileName);
 
             var facebookSettings = JsonConvert
                 .DeserializeObject<FacebookSettings>(settings);
@@ -34,7 +38,7 @@
             var parser = new Parser(htmlParser, httpClient);
             var upload = new Upload(accessToken);
 
-            var engine = new Engine(baseUrl, parser, upload, id);
+            var engine = new Engine(Url, parser, upload, id);
 
             engine
                 .RunAsync()

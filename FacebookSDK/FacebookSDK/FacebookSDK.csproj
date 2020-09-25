@@ -14,7 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataParser\DataParser.csproj" />
-    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\FacebookSDK.Common\FacebookSDK.Common.csproj" />
+    <ProjectReference Include="..\Models\FacebookSDK.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

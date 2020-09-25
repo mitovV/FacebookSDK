@@ -7,6 +7,8 @@
 
     using DataParser;
 
+    using static Common.GlobalConstants.Engine;
+
     public class Engine
     {
         private readonly string baseUrl;
@@ -27,7 +29,7 @@
             while (true)
             {
                 Thread
-                        .Sleep(5000);
+                        .Sleep(SleepingTime);
 
                 try
                 {
@@ -41,26 +43,26 @@
                             continue;
                         }
 
-                        var message = $"🛒 {post.Title}\n💴 Цена: {post.Price}\n🌎 {post.Office}\n‼ Детайли: ⬇⬇⬇⬇\n✅ {post.ProductDetailsLink}";
+                        var message = string.Format(Message, post.Title, post.Price, post.Office, post.ProductDetailsLink);
 
                         var result = await upload
                             .UploadPictureToWallAsync(id, post.PictureUrl, message);
 
-                        var postId = (string)result["id"];
+                        var postId = (string)result[ResultId];
 
-                        Console.WriteLine($"Post Id: {postId}");
+                        Console.WriteLine($"{PostId} {postId}");
 
-                        Console.WriteLine($"Json: {result}");
-                        Console.WriteLine($"Time: {DateTime.Now}");
+                        Console.WriteLine($"{Json} {result}");
+                        Console.WriteLine($"{Time} {DateTime.Now}");
 
-                       await File
-                            .WriteAllTextAsync("lastPostLink.txt", post.ProductDetailsLink);
+                        await File
+                             .WriteAllTextAsync(LastPostLinkFileName, post.ProductDetailsLink);
                     }
                 }
                 catch (Exception ex)
                 {
                     await File
-                        .WriteAllTextAsync("exception.txt", $"{ex.Message}\n{ex.StackTrace}\n{DateTime.Now}");
+                        .WriteAllTextAsync(ExeptonFileName, $"{ex.Message}\n{ex.StackTrace}\n{DateTime.Now}");
 
                     Console.WriteLine(ex.Message);
 

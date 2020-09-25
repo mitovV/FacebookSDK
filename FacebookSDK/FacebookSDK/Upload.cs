@@ -5,36 +5,30 @@
 
     using Facebook;
 
+    using static Common.GlobalConstants.Upload;
+
     public class Upload
     {
         private readonly FacebookClient facebookClient;
 
         public Upload(string accessToken)
-        {
-            this.facebookClient = new FacebookClient(accessToken);
-        }
+         => this.facebookClient = new FacebookClient(accessToken);
+
 
         public async Task<IDictionary<string, object>> UploadPictureToWallAsync(string id, string pictureUrl, string message)
-        {
-            var result = (IDictionary<string, object>)await facebookClient
-                .PostTaskAsync(id + "/photos", new Dictionary<string, object>
+         => (IDictionary<string, object>)await facebookClient
+                .PostTaskAsync(id + PhotoPost, new Dictionary<string, object>
                                    {
-                                       { "url", pictureUrl },
-                                       { "message",$"{message}" }
+                                       { UrlPost, pictureUrl },
+                                       { MessagePost, message }
                                    });
 
-            return result;
-        }
 
         public async Task<IDictionary<string, object>> UploadPostToWallAsync(string id, string text)
-        {
-            var result = (IDictionary<string, object>)await facebookClient
-                .PostTaskAsync(id + "/feed", new Dictionary<string, object>
+         => (IDictionary<string, object>)await facebookClient
+                .PostTaskAsync(id + FeedPost, new Dictionary<string, object>
                                    {
-                                       { "message",$"{text}" }
+                                       { MessagePost, text }
                                    });
-
-            return result;
-        }
     }
 }

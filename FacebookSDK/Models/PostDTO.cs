@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace FacebookSDK.Models
 {
     public class PostDTO
     {
