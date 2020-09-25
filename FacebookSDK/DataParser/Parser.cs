@@ -8,7 +8,6 @@
 
     using AngleSharp.Html.Parser;
 
-    using static FacebookSDK.Common.GlobalConstants;
     using static FacebookSDK.Common.GlobalConstants.Parser;
 
     public class Parser
@@ -44,7 +43,7 @@
                 .Trim();
 
             var lastPostLink = File
-                .ReadAllText(LastPostLinkFileName);
+                .ReadAllText(Common.GlobalConstants.LastPostLinkFileName);
 
             if (lastPostLink == productDetailsLink)
             {
