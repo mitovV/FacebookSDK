@@ -1,4 +1,4 @@
-﻿namespace DataParser
+﻿namespace FacebookSDK.DataParser
 {
     using System.IO;
     using System.Net.Http;
@@ -7,6 +7,9 @@
     using FacebookSDK.Models;
 
     using AngleSharp.Html.Parser;
+
+    using static FacebookSDK.Common.GlobalConstants;
+    using static FacebookSDK.Common.GlobalConstants.Parser;
 
     public class Parser
     {
@@ -20,7 +23,7 @@
 
             this.httpClient
               .DefaultRequestHeaders
-              .Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:79.0) Gecko/20100101 Firefox/79.0");
+              .Add(RequestHeaderName, RequestHeaderValue);
         }
 
         public async Task<PostDTO> GetDataAsync(string baseUrl)
@@ -32,16 +35,16 @@
                 .ParseDocumentAsync(html);
 
             var element = document
-                .QuerySelector("div[class='moduletable'] div[class='vmgroup'] ul li");
+                .QuerySelector(ElementSelector);
 
             var productDetailsLink = baseUrl + element
                 .FirstElementChild
-                .Attributes["href"]
+                .Attributes[DetailsLinkAttributeName]
                 .Value
                 .Trim();
 
             var lastPostLink = File
-                .ReadAllText("lastPostLink.txt");
+                .ReadAllText(LastPostLinkFileName);
 
             if (lastPostLink == productDetailsLink)
             {
@@ -55,23 +58,23 @@
                 .ParseDocumentAsync(productPage);
 
             var office = productPageDocument
-                .QuerySelector("div[class='productdetails-view productdetails'] div[class='manufacturer']")
+                .QuerySelector(OfficeSelector)
                 .TextContent
                 .Trim();
 
             var pictureUrl = baseUrl + element
                 .FirstElementChild
-                .QuerySelector("img")
-                .Attributes["src"]
+                .QuerySelector(PictureUrlSelector)
+                .Attributes[PictureUrlAttributeName]
                 .Value;
 
             var title = element
-                .QuerySelector("div[class='clear']")
+                .QuerySelector(TitleSelector)
                 .NextElementSibling
                 .InnerHtml;
 
             var price = document
-                .QuerySelector("div[class='moduletable'] div[class='vmgroup'] div[class='product-price'] div [class='PricesalesPrice']")
+                .QuerySelector(PriceSelector)
                 .InnerHtml;
 
             return new PostDTO

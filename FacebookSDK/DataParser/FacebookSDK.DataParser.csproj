@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FacebookSDK.Common\FacebookSDK.Common.csproj" />
     <ProjectReference Include="..\Models\FacebookSDK.Models.csproj" />
   </ItemGroup>
 

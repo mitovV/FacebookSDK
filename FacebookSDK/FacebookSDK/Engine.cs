@@ -5,18 +5,17 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using DataParser;
-
+    using static Common.GlobalConstants;
     using static Common.GlobalConstants.Engine;
 
     public class Engine
     {
         private readonly string baseUrl;
-        private readonly Parser parser;
+        private readonly DataParser.Parser parser;
         private readonly Upload upload;
         private readonly string id;
 
-        public Engine(string baseUrl, Parser parser, Upload upload, string id)
+        public Engine(string baseUrl, DataParser.Parser parser, Upload upload, string id)
         {
             this.baseUrl = baseUrl;
             this.parser = parser;
